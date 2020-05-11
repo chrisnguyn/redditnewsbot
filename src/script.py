@@ -1,7 +1,8 @@
+# If you don't have these imports, 'pip3 install praw' + 'pip3 install tweepy'
 import praw
 import tweepy
 
-# Read from file 1 and build Reddit instance
+# Read from file 1 and build Reddit client
 file1 = open("../reddit.txt", "r")
 reddit_credentials = file1.read().splitlines()
 reddit = praw.Reddit(
@@ -25,8 +26,10 @@ auth = tweepy.OAuthHandler(API_KEY, API_SECRET_KEY)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
+file2.close()
 
-# Grab top four posts from the r/worldnews subreddit and print its title and link to the post + tweet them!
+
+# Grab top posts from the r/worldnews subreddit and tweet them; printing to console for testing purposes
 posts = reddit.subreddit("worldnews").hot(limit = 4)
 for post in posts:
     if (post.stickied == False):
